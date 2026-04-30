@@ -1,0 +1,87 @@
+<view class="container">
+  <!-- 订单状态 -->
+  <view class="order-status-section {{order.order_status == 1 ? 'pending' : order.order_status == 2 ? 'paid' : order.order_status == 3 ? 'completed' : (order.order_status == 4 || order.order_status == 5) ? 'cancelled' : 'pending'}}">
+    <text class="order-status">{{order.order_status == 1 ? '待支付' : order.order_status == 2 ? '已支付' : order.order_status == 3 ? '已完成' : (order.order_status == 4 || order.order_status == 5) ? '已取消' : '待支付'}}</text>
+    <text class="order-time">{{order.create_time}}</text>
+  </view>
+
+  <!-- 收货地址 -->
+  <view class="address-section">
+    <view class="section-title">收货信息</view>
+    <view class="address-detail">
+      <view class="address-name">
+        <text>{{order.consignee}}</text>
+        <text class="address-phone">{{order.phone}}</text>
+      </view>
+      <text class="address-address">{{order.address}}</text>
+    </view>
+  </view>
+
+  <!-- 商品信息 -->
+  <view class="goods-section">
+    <view class="section-title">商品信息</view>
+    <view wx:for="{{order.items}}" wx:key="product_id" class="goods-item">
+      <image src="{{item.cover_img || 'https://img.baidu.com/it/u=123456789,123456789&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500'}}" class="goods-image"></image>
+      <view class="goods-info">
+        <text class="goods-name">{{item.product_name}}</text>
+        <view class="goods-price-count">
+          <text class="goods-price">¥{{item.price}}</text>
+          <text class="goods-count">x{{item.quantity}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 订单信息 -->
+  <view class="order-info-section">
+    <view class="section-title">订单信息</view>
+    <view class="order-info-item">
+      <text class="info-label">订单编号</text>
+      <text class="info-value">{{order.order_no}}</text>
+    </view>
+    <view class="order-info-item">
+      <text class="info-label">创建时间</text>
+      <text class="info-value">{{order.create_time}}</text>
+    </view>
+    <view class="order-info-item">
+      <text class="info-label">支付方式</text>
+      <text class="info-value">微信支付</text>
+    </view>
+    <view class="order-info-item" wx:if="{{order.pay_time}}">
+      <text class="info-label">支付时间</text>
+      <text class="info-value">{{order.pay_time}}</text>
+    </view>
+  </view>
+
+  <!-- 金额信息 -->
+  <view class="price-section">
+    <view class="section-title">金额信息</view>
+    <view class="price-item">
+      <text class="price-label">商品金额</text>
+      <text class="price-value">¥{{order.total_amount}}</text>
+    </view>
+    <view class="price-item">
+      <text class="price-label">运费</text>
+      <text class="price-value">¥0.00</text>
+    </view>
+    <view class="price-item total">
+      <text class="price-label">实付金额</text>
+      <text class="price-value total-price">¥{{order.total_amount}}</text>
+    </view>
+  </view>
+
+  <!-- 底部操作栏 -->
+  <view class="bottom-bar">
+    <view class="total-price">
+      <text>实付：</text>
+      <text class="total-amount">¥{{order.total_amount}}</text>
+    </view>
+    <view class="order-actions">
+      <view wx:if="{{order.order_status == 1}}" class="action-btn pay-btn" bindtap="payOrder">去支付</view>
+      <view wx:else class="action-btn pay-btn disabled">已支付</view>
+      <view wx:if="{{order.order_status == 1}}" class="action-btn cancel-btn" bindtap="cancelOrder">取消订单</view>
+      <view wx:if="{{order.order_status == 2}}" class="action-btn receive-btn" bindtap="receiveOrder">确认收货</view>
+      <view class="action-btn detail-btn" bindtap="navigateToList">返回列表</view>
+    </view>
+  </view>
+</view>

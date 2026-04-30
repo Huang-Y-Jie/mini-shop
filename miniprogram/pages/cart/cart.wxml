@@ -1,0 +1,70 @@
+<view class="container">
+  <!-- 加载状态 -->
+  <view wx:if="{{loading}}" class="loading-container">
+    <view class="loading-spinner"></view>
+    <text class="loading-text">加载中...</text>
+  </view>
+  
+  <!-- 购物车商品列表 -->
+  <view wx:if="{{cartItems.length > 0}}" class="cart-list">
+    <!-- 全选 -->
+    <view class="select-all-section">
+      <view class="select-all" bindtap="toggleSelectAll">
+        <view class="checkbox {{selectAll ? 'active' : ''}}">
+          <view class="checkbox-inner"></view>
+        </view>
+        <text class="select-all-text">全选</text>
+      </view>
+    </view>
+    
+    <!-- 商品列表 -->
+    <view wx:for="{{cartItems}}" wx:key="id" class="cart-item">
+      <view class="cart-item-select" bindtap="toggleSelect" data-cart-id="{{item.product_id}}">
+        <view class="checkbox {{item.selected ? 'active' : ''}}">
+          <view class="checkbox-inner"></view>
+        </view>
+      </view>
+      <image src="{{item.product_images}}" class="cart-item-image"></image>
+      <view class="cart-item-info">
+        <text class="cart-item-name">{{item.product_name}}</text>
+        <view class="cart-item-price-container">
+          <text class="cart-item-price">¥{{item.product_price}}</text>
+          <text wx:if="{{item.original_price}}" class="cart-item-original-price">¥{{item.original_price}}</text>
+        </view>
+        <view class="cart-item-count">
+          <view class="cart-item-count-btn" bindtap="decreaseCount" data-cart-id="{{item.product_id}}">-</view>
+          <input class="cart-item-count-input" value="{{item.quantity}}" bindinput="handleQuantityInput" bindblur="handleQuantityBlur" data-cart-id="{{item.product_id}}" type="number" min="1"></input>
+          <view class="cart-item-count-btn" bindtap="increaseCount" data-cart-id="{{item.product_id}}">+</view>
+        </view>
+      </view>
+      <view class="cart-item-delete" bindtap="deleteItem" data-cart-id="{{item.product_id}}">
+        <image src="https://img.icons8.com/ios-filled/30/ff4d4f/delete.png" class="delete-icon"></image>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空购物车 -->
+  <view wx:else class="empty-state">
+    <view class="empty-state-icon">🛒</view>
+    <text class="empty-state-text">{{isLoggedIn ? '购物车是空的' : '请先登录'}}</text>
+    <text class="empty-state-subtext">{{isLoggedIn ? '快去挑选心仪的商品吧' : '登录后查看购物车内容'}}</text>
+    <button class="btn btn-primary" bindtap="{{isLoggedIn ? 'navigateToHome' : 'navigateToLogin'}}">
+      {{isLoggedIn ? '去购物' : '去登录'}}
+    </button>
+  </view>
+
+  <!-- 底部结算栏 -->
+  <view wx:if="{{cartItems.length > 0}}" class="bottom-bar">
+    <view class="select-all" bindtap="toggleSelectAll">
+      <view class="checkbox {{selectAll ? 'active' : ''}}">
+        <view class="checkbox-inner"></view>
+      </view>
+      <text class="select-all-text">全选</text>
+    </view>
+    <view class="total-container">
+      <text class="total-price">合计：</text>
+      <text class="total-amount">¥{{totalAmount}}</text>
+    </view>
+    <view class="settle-btn" bindtap="navigateToConfirm" disabled="{{selectedCount === 0}}">结算</view>
+  </view>
+</view>

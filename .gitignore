@@ -1,0 +1,55 @@
+# 编辑器和IDE配置
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Trae配置
+.trae/
+
+# 虚拟环境和依赖
+.venv/
+env/
+venv/
+node_modules/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# 构建产物
+dist/
+build/
+*.log
+
+# 环境变量和密钥文件
+.env
+.env.local
+.env.*.local
+*.key
+*.pem
+*.crt
+
+# 小程序配置文件（包含appid）
+miniprogram/project.config.json
+
+# 数据库文件
+*.db
+*.sqlite
+*.sqlite3
+
+# 操作系统文件
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# 日志文件
+*.log
+logs/
+
+# 缓存文件
+.cache/
+.parcel-cache/
+.eslintcache

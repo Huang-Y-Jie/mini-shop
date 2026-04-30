@@ -1,0 +1,46 @@
+<view class="container">
+  <view class="header">
+    <text class="title">{{isEdit ? '编辑地址' : '新增地址'}}</text>
+  </view>
+  
+  <form bindsubmit="submitForm">
+    <view class="form-item">
+      <text class="label">收货人</text>
+      <input name="name" value="{{formData.name}}" placeholder="请输入收货人姓名" placeholder-class="placeholder" />
+    </view>
+    
+    <view class="form-item">
+      <text class="label">手机号</text>
+      <input name="phone" value="{{formData.phone}}" placeholder="请输入手机号" placeholder-class="placeholder" />
+    </view>
+    
+    <view class="form-item">
+      <text class="label">省份</text>
+      <input name="province" value="{{formData.province}}" placeholder="请输入省份" placeholder-class="placeholder" />
+    </view>
+    
+    <view class="form-item">
+      <text class="label">城市</text>
+      <input name="city" value="{{formData.city}}" placeholder="请输入城市" placeholder-class="placeholder" />
+    </view>
+    
+    <view class="form-item">
+      <text class="label">区县</text>
+      <input name="district" value="{{formData.district}}" placeholder="请输入区县" placeholder-class="placeholder" />
+    </view>
+    
+    <view class="form-item">
+      <text class="label">详细地址</text>
+      <textarea name="detail" value="{{formData.detail}}" placeholder="请输入详细地址" placeholder-class="placeholder" style="height: 150rpx;" />
+    </view>
+    
+    <view class="form-item checkbox">
+      <text class="label">默认地址</text>
+      <checkbox value="isDefault" checked="{{formData.is_default}}" bindchange="onDefaultChange" />
+    </view>
+    
+    <button form-type="submit" class="submit-btn" loading="{{loading}}">
+      {{isEdit ? '保存修改' : '添加地址'}}
+    </button>
+  </form>
+</view>

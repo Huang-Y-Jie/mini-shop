@@ -1,0 +1,61 @@
+<view class="search-container">
+  <!-- 搜索栏 -->
+  <view class="search-bar">
+    <view class="search-input-wrapper">
+      <icon class="search-icon" type="search" size="20"></icon>
+      <input 
+        class="search-input" 
+        placeholder="搜索商品" 
+        value="{{keyword}}" 
+        bindinput="onInput" 
+        bindconfirm="onSearch"
+      ></input>
+      <text class="cancel-btn" bindtap="onCancel">取消</text>
+    </view>
+  </view>
+  
+  <!-- 搜索结果 -->
+  <view class="search-result" wx:if="{{showResult}}">
+    <view class="result-header" wx:if="{{goodsList.length > 0}}">
+      找到 {{goodsList.length}} 个结果
+    </view>
+    <view class="no-result" wx:else>
+      没有找到相关商品
+    </view>
+    
+    <view class="goods-list" wx:if="{{goodsList.length > 0}}">
+      <view 
+        class="goods-item" 
+        wx:for="{{goodsList}}" 
+        wx:key="id" 
+        bindtap="navigateToDetail" 
+        data-id="{{item.id}}"
+      >
+        <image class="goods-image" src="{{item.cover_img}}"></image>
+        <view class="goods-info">
+          <text class="goods-name">{{item.name}}</text>
+          <text class="goods-price">¥{{item.price}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  
+  <!-- 搜索历史 -->
+  <view class="search-history" wx:if="{{!showResult}}">
+    <view class="history-header">
+      <text>搜索历史</text>
+      <text class="clear-btn" bindtap="clearHistory">清空</text>
+    </view>
+    <view class="history-tags">
+      <view 
+        class="history-tag" 
+        wx:for="{{searchHistory}}" 
+        wx:key="*this" 
+        bindtap="searchHistoryItem" 
+        data-keyword="{{item}}"
+      >
+        {{item}}
+      </view>
+    </view>
+  </view>
+</view>

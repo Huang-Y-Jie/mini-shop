@@ -1,0 +1,46 @@
+<view class="container">
+  <!-- 订单状态筛选 -->
+  <view class="order-tabs">
+    <view class="tab-item {{activeTab == 0 ? 'active' : ''}}" bindtap="switchTab" data-tab="0">全部</view>
+    <view class="tab-item {{activeTab == 1 ? 'active' : ''}}" bindtap="switchTab" data-tab="1">待支付</view>
+    <view class="tab-item {{activeTab == 3 ? 'active' : ''}}" bindtap="switchTab" data-tab="3">已完成</view>
+    <view class="tab-item {{activeTab == 4 ? 'active' : ''}}" bindtap="switchTab" data-tab="4">已取消</view>
+  </view>
+
+  <!-- 订单列表 -->
+  <view wx:if="{{orders.length > 0}}" class="order-list">
+    <view wx:for="{{orders}}" wx:key="order_id" class="order-item">
+      <view class="order-header">
+        <text class="order-no">订单号：{{item.order_no}}</text>
+        <text class="order-status {{item.order_status == 1 ? 'pending' : item.order_status == 2 ? 'paid' : item.order_status == 3 ? 'completed' : (item.order_status == 4 || item.order_status == 5) ? 'cancelled' : 'pending'}}">{{item.order_status == 1 ? '待支付' : item.order_status == 2 ? '已支付' : item.order_status == 3 ? '已完成' : (item.order_status == 4 || item.order_status == 5) ? '已取消' : '待支付'}}</text>
+      </view>
+      <view class="order-body">
+        <view wx:for="{{item.items}}" wx:key="product_id" class="order-goods">
+          <image src="{{item.cover_img || 'https://img.baidu.com/it/u=123456789,123456789&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500'}}" class="goods-image"></image>
+          <view class="goods-info">
+            <text class="goods-name">{{item.product_name}}</text>
+            <view class="goods-price-count">
+              <text class="goods-price">¥{{item.price}}</text>
+              <text class="goods-count">x{{item.quantity}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="order-footer">
+        <text class="order-total">¥{{item.total_amount}}</text>
+        <view class="order-actions">
+          <view wx:if="{{item.order_status == 1}}" class="action-btn pay-btn" bindtap="payOrder" data-order-id="{{item.order_id}}">去支付</view>
+          <view wx:if="{{item.order_status == 1}}" class="action-btn cancel-btn" bindtap="cancelOrder" data-order-id="{{item.order_id}}">取消订单</view>
+          <view class="action-btn detail-btn" bindtap="viewOrderDetail" data-order-id="{{item.order_id}}">查看详情</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空订单状态 -->
+  <view wx:else class="empty-state">
+    <image src="https://img.icons8.com/ios-filled/100/000000/order.png" class="empty-state-icon"></image>
+    <text>暂无订单</text>
+    <button class="btn btn-primary" bindtap="navigateToHome">去购物</button>
+  </view>
+</view>

@@ -1,0 +1,82 @@
+<view class="container">
+  <!-- 收货地址 -->
+  <view class="address-section" bindtap="navigateToAddressList">
+    <view class="address-icon">
+      <image src="https://img.icons8.com/ios-filled/50/000000/marker.png" class="icon"></image>
+    </view>
+    <view class="address-info">
+      <view wx:if="{{address}}" class="address-detail">
+        <view class="address-name">
+          <text>{{address.name}}</text>
+          <text class="address-phone">{{address.phone}}</text>
+        </view>
+        <text class="address-address">{{address.address}}</text>
+      </view>
+      <view wx:else class="address-placeholder">
+        <text>添加收货地址</text>
+      </view>
+    </view>
+    <view class="address-arrow">
+      <image src="https://img.icons8.com/ios-filled/30/000000/chevron-right.png" class="arrow"></image>
+    </view>
+  </view>
+
+  <!-- 地区选择 -->
+  <view class="region-section" bindtap="showRegionSelector">
+    <view class="region-icon">
+      <image src="https://img.icons8.com/ios-filled/50/000000/world.png" class="icon"></image>
+    </view>
+    <view class="region-info">
+      <view wx:if="{{selectedRegion}}" class="region-detail">
+        <text class="region-name">{{selectedRegion.region_name}}</text>
+        <text class="region-fee">运费：¥{{selectedRegion.shipping_fee}}</text>
+      </view>
+      <view wx:else class="region-placeholder">
+        <text>选择所在地区</text>
+      </view>
+    </view>
+    <view class="region-arrow">
+      <image src="https://img.icons8.com/ios-filled/30/000000/chevron-right.png" class="arrow"></image>
+    </view>
+  </view>
+
+  <!-- 商品列表 -->
+  <view class="goods-section">
+    <view class="section-title">商品信息</view>
+    <view wx:for="{{orderItems}}" wx:key="id" class="goods-item">
+      <image src="{{item.product_images}}" class="goods-image"></image>
+      <view class="goods-info">
+        <text class="goods-name">{{item.product_name}}</text>
+        <view class="goods-price-count">
+          <text class="goods-price">¥{{item.price}}</text>
+          <text class="goods-count">x{{item.quantity}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 订单金额 -->
+  <view class="price-section">
+    <view class="price-item">
+      <text class="price-label">商品金额</text>
+      <text class="price-value">¥{{goodsAmount}}</text>
+    </view>
+    <view class="price-item">
+      <text class="price-label">运费</text>
+      <text class="price-value">¥{{shippingFee}}</text>
+    </view>
+    <view class="price-item total">
+      <text class="price-label">合计</text>
+      <text class="price-value total-price">¥{{totalAmount}}</text>
+    </view>
+  </view>
+
+  <!-- 底部提交栏 -->
+  <view class="bottom-bar">
+    <view class="total-price">
+      <text>合计：</text>
+      <text class="total-amount">¥{{totalAmount}}</text>
+    </view>
+    <view class="submit-btn" bindtap="submitOrder">提交订单</view>
+  </view>
+</view>

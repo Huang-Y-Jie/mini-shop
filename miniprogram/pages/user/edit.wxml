@@ -1,0 +1,38 @@
+<view class="container">
+  <view class="page-header">
+    <text class="page-title">修改个人信息</text>
+  </view>
+  
+  <form bindsubmit="submitForm">
+    <view class="form-item">
+      <text class="form-label">昵称</text>
+      <input 
+        class="form-input" 
+        name="nickname" 
+        value="{{formData.nickname}}" 
+        placeholder="请输入昵称"
+      />
+    </view>
+    
+    <view class="form-item">
+      <text class="form-label">手机号</text>
+      <input 
+        class="form-input" 
+        name="phone" 
+        value="{{formData.phone}}" 
+        placeholder="请输入手机号"
+        type="number"
+      />
+    </view>
+    
+    <view class="form-submit">
+      <button 
+        class="submit-btn" 
+        form-type="submit" 
+        loading="{{loading}}"
+      >
+        保存修改
+      </button>
+    </view>
+  </form>
+</view>

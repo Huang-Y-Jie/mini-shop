@@ -1,0 +1,230 @@
+.container {
+  padding-bottom: 120rpx;
+  background-color: var(--background-color);
+  min-height: 100vh;
+}
+
+.header {
+  padding: 32rpx 24rpx;
+  border-bottom: 1rpx solid var(--border-color);
+  background-color: var(--white);
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 99;
+}
+
+.title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+}
+
+.title::before {
+  content: '';
+  width: 8rpx;
+  height: 32rpx;
+  background-color: var(--primary-color);
+  border-radius: 4rpx;
+  margin-right: 12rpx;
+}
+
+.empty {
+  padding: 120rpx 0;
+  text-align: center;
+  color: var(--text-light);
+  font-size: 28rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.empty-icon {
+  width: 120rpx;
+  height: 120rpx;
+  margin-bottom: 24rpx;
+  opacity: 0.5;
+}
+
+.address-list {
+  padding: 0 16rpx;
+}
+
+.address-item {
+  margin-top: 16rpx;
+  padding: 28rpx;
+  background-color: var(--white);
+  border-radius: 12rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  animation: fadeIn 0.5s ease forwards;
+  position: relative;
+  overflow: hidden;
+}
+
+.address-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4rpx;
+  background-color: var(--primary-color);
+  border-top-left-radius: 12rpx;
+  border-bottom-left-radius: 12rpx;
+}
+
+.address-item:active {
+  box-shadow: 0 6rpx 16rpx rgba(0, 0, 0, 0.12);
+  transform: translateY(-4rpx);
+}
+
+.name-phone {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20rpx;
+  padding-left: 16rpx;
+}
+
+.name {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: var(--text-primary);
+  margin-right: 30rpx;
+}
+
+.phone {
+  font-size: 28rpx;
+  color: var(--text-secondary);
+  margin-right: 20rpx;
+}
+
+.default-tag {
+  font-size: 24rpx;
+  color: var(--primary-color);
+  border: 1rpx solid var(--primary-color);
+  border-radius: 12rpx;
+  padding: 4rpx 12rpx;
+  background-color: rgba(255, 107, 53, 0.1);
+  font-weight: 500;
+}
+
+.address-detail {
+  font-size: 26rpx;
+  color: var(--text-secondary);
+  line-height: 40rpx;
+  margin-bottom: 20rpx;
+  padding-left: 16rpx;
+}
+
+.address-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20rpx;
+  border-top: 1rpx solid var(--border-color);
+  padding-top: 20rpx;
+  padding-left: 16rpx;
+}
+
+.edit-btn, .delete-btn {
+  font-size: 24rpx;
+  padding: 8rpx 24rpx;
+  margin-left: 20rpx;
+  border-radius: 8rpx;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: 1rpx solid;
+}
+
+.edit-btn {
+  color: var(--text-primary);
+  border-color: var(--border-color);
+  background-color: var(--white);
+}
+
+.edit-btn:active {
+  background-color: var(--primary-color);
+  color: var(--white);
+  border-color: var(--primary-color);
+  transform: translateY(-2rpx);
+}
+
+.delete-btn {
+  color: var(--error-color);
+  border-color: var(--error-color);
+  background-color: var(--white);
+}
+
+.delete-btn:active {
+  background-color: var(--error-color);
+  color: var(--white);
+  transform: translateY(-2rpx);
+}
+
+.add-btn {
+  position: fixed;
+  bottom: 30rpx;
+  left: 20rpx;
+  right: 20rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  background-color: var(--primary-color);
+  color: var(--white);
+  border-radius: 44rpx;
+  font-size: 32rpx;
+  font-weight: 500;
+  text-align: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4rpx 12rpx rgba(255, 107, 53, 0.3);
+  cursor: pointer;
+  animation: pulse 2s infinite;
+  z-index: 999;
+  border: none;
+}
+
+.add-btn:active {
+  background-color: var(--secondary-color);
+  transform: translateY(-2rpx);
+  box-shadow: 0 6rpx 16rpx rgba(255, 107, 53, 0.4);
+}
+
+/* 响应式设计 */
+@media (max-width: 750rpx) {
+  .header {
+    padding: 28rpx 20rpx;
+  }
+  
+  .address-list {
+    padding: 0 12rpx;
+  }
+  
+  .address-item {
+    margin-top: 12rpx;
+    padding: 24rpx;
+  }
+  
+  .name-phone {
+    padding-left: 12rpx;
+  }
+  
+  .address-detail {
+    padding-left: 12rpx;
+  }
+  
+  .address-actions {
+    padding-left: 12rpx;
+  }
+  
+  .add-btn {
+    width: 680rpx;
+    height: 80rpx;
+    line-height: 80rpx;
+  }
+  
+  .empty {
+    padding: 100rpx 0;
+  }
+}
